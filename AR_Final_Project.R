@@ -145,7 +145,7 @@ ev_ts_2017 %>%
 # Since the p-value > 0.05: we can say that the sales data are stationary.
 
 
-#Set your training and test sets
+#Setting training and test sets
 dataset <- ev_ts_2017 |> 
   select(Month, sales)|>
   rename(BEV = sales)|>
@@ -162,11 +162,9 @@ test <- dataset |>
 
 autoplot(train, BEV) +
   autolayer(test,BEV,color= "red")
-# Find the model that fits best with your training data. 
 
+# Finding the model that fits best with your training data. 
 
-# This part will reflect the output of a few related steps as we did in class. First, decide whether your data is seasonal or not: 
-# If it is seasonal: use the decomposition_model() function within model() suit to model seasonal and non-seasonal parts separately. 
 fit_sales <-  train |>
   model(
     # seasonal arima
@@ -224,11 +222,4 @@ fit <- dataset |>
 
 forecast(fit, future_values) |>
   autoplot(dataset)
-
-
-
-# Note that when we did this in section 2.4, we didn’t really try hard to obtain a better fit from the multiple regression model but you should try to incorporate the elements from the second handout that goes into some details of these models. In particular, you can try different trend types, independent variables, and lagged values of independent variables to obtain a better fit. 
-# At the end of this process, you should have a table where you compare models with respect to the RMSE they generated to pick the winner. 
-# For the winner model, do the residual analysis and if necessary modify the model until you are satisfied with it. 
-# Obtain forecasts from the final model.
 
